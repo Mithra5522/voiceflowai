@@ -2,47 +2,64 @@ import './App.css'
 
 function App() {
   return (
-    <>
+    <div>
 
       {/* Navbar */}
 
       <nav className="navbar">
 
-        <div className="logo">VoiceFlow AI</div>
+        <div className="logo">
+          VoiceFlow AI
+        </div>
 
         <ul className="nav-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Features</a></li>
-          <li><a href="#">Workflow</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
 
-        <button className="nav-btn">Get Started</button>
+          <li>
+            <a href="#home">Home</a>
+          </li>
+
+          <li>
+            <a href="#features">Features</a>
+          </li>
+
+          <li>
+            <a href="#workflow">Workflow</a>
+          </li>
+
+          <li>
+            <a href="#contact">Contact</a>
+          </li>
+
+        </ul>
 
       </nav>
 
 
       {/* Hero Section */}
 
-      <section className="hero">
+      <section id="home" className="hero">
 
         <div className="hero-content">
 
-          <h1>AI-Driven Meeting Minutes & Jira Ticket Creator</h1>
+          <h1>
+            AI-Powered Meeting Minutes &
+            Jira Ticket Automation
+          </h1>
 
           <p>
-            VoiceFlow AI transforms meeting recordings into intelligent summaries,
-            action items, and automated Jira tickets using advanced AI technology.
+            VoiceFlow AI automatically converts meeting recordings into
+            smart summaries, action items, and Jira tickets using
+            advanced artificial intelligence technology.
           </p>
 
           <div className="hero-buttons">
 
             <button className="primary-btn">
-              Upload Meeting
+              Get Started
             </button>
 
             <button className="secondary-btn">
-              Explore Features
+              Learn More
             </button>
 
           </div>
@@ -52,7 +69,7 @@ function App() {
         <div className="hero-image">
 
           <img
-            src="https://cdn-icons-png.flaticon.com/512/4712/4712027.png"
+            src="https://img.freepik.com/free-vector/artificial-intelligence-concept-illustration_114360-7000.jpg"
             alt="AI Assistant"
           />
 
@@ -61,33 +78,49 @@ function App() {
       </section>
 
 
-      {/* Features Section */}
+      {/* Features */}
 
-      <section className="features">
+      <section id="features" className="features">
 
         <h2>Core Features</h2>
+
+        <p className="subtitle">
+          Smart AI automation features designed for modern teams.
+        </p>
 
         <div className="feature-container">
 
           <div className="feature-card">
-            <h3>Audio Transcription</h3>
+
+            <h3>Speech Recognition</h3>
+
             <p>
-              Convert meeting recordings into accurate text using AI speech recognition.
+              Convert meeting audio recordings into accurate transcripts
+              using AI-powered speech processing.
             </p>
+
           </div>
 
           <div className="feature-card">
+
             <h3>AI Summarization</h3>
+
             <p>
-              Generate concise meeting summaries and key decision points instantly.
+              Generate concise summaries and important discussion points
+              automatically.
             </p>
+
           </div>
 
           <div className="feature-card">
+
             <h3>Jira Automation</h3>
+
             <p>
-              Automatically create Jira and Trello tasks from meeting discussions.
+              Automatically generate Jira and Trello tickets from
+              meeting conversations.
             </p>
+
           </div>
 
         </div>
@@ -95,30 +128,52 @@ function App() {
       </section>
 
 
-      {/* Workflow Section */}
+      {/* Workflow */}
 
-      <section className="workflow">
+      <section id="workflow" className="workflow">
 
         <h2>How VoiceFlow Works</h2>
 
+        <p className="subtitle">
+          Intelligent workflow automation in three simple steps.
+        </p>
+
         <div className="steps">
 
-          <div className="step">
+          <div className="step-box">
+
             <span>1</span>
-            <h3>Upload Audio</h3>
-            <p>Upload recorded meeting audio files.</p>
+
+            <h3>Upload Meeting</h3>
+
+            <p>
+              Upload recorded meeting audio files securely.
+            </p>
+
           </div>
 
-          <div className="step">
+          <div className="step-box">
+
             <span>2</span>
+
             <h3>AI Processing</h3>
-            <p>AI transcribes and analyzes conversations.</p>
+
+            <p>
+              AI analyzes conversations and extracts important details.
+            </p>
+
           </div>
 
-          <div className="step">
+          <div className="step-box">
+
             <span>3</span>
-            <h3>Create Jira Tickets</h3>
-            <p>Tasks and tickets are generated automatically.</p>
+
+            <h3>Create Tickets</h3>
+
+            <p>
+              Action items and Jira tickets are generated automatically.
+            </p>
+
           </div>
 
         </div>
@@ -128,37 +183,56 @@ function App() {
 
       {/* Statistics */}
 
-      <section className="stats">
+      <section className="statistics">
 
-        <div className="stat-box">
+        <div className="stat-card">
+
           <h2>95%</h2>
-          <p>Productivity Boost</p>
+
+          <p>Productivity Increase</p>
+
         </div>
 
-        <div className="stat-box">
+        <div className="stat-card">
+
           <h2>80%</h2>
+
           <p>Time Saved</p>
+
         </div>
 
-        <div className="stat-box">
+        <div className="stat-card">
+
           <h2>100+</h2>
-          <p>Meetings Processed</p>
+
+          <p>Meetings Automated</p>
+
         </div>
 
       </section>
 
 
-      {/* Contact Section */}
+      {/* Contact */}
 
-      <section className="contact">
+      <section id="contact" className="contact">
 
         <h2>Contact Us</h2>
 
+        <p className="subtitle">
+          Reach out to learn more about VoiceFlow AI.
+        </p>
+
         <form>
 
-          <input type="text" placeholder="Enter Your Name" />
+          <input
+            type="text"
+            placeholder="Enter Your Name"
+          />
 
-          <input type="email" placeholder="Enter Your Email" />
+          <input
+            type="email"
+            placeholder="Enter Your Email"
+          />
 
           <textarea
             rows="5"
@@ -184,7 +258,7 @@ function App() {
 
       </footer>
 
-    </>
+    </div>
   )
 }
 
