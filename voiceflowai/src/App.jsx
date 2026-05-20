@@ -1,8 +1,71 @@
 import './App.css'
+import { useState, useEffect } from 'react'
 
 function App() {
+
+  const [task, setTask] = useState('')
+  const [assignedTo, setAssignedTo] = useState('')
+  const [priority, setPriority] = useState('High')
+  const [tasks, setTasks] = useState([])
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+
+    const savedTasks =
+      JSON.parse(localStorage.getItem('voiceflowtasks'))
+
+    if(savedTasks){
+      setTasks(savedTasks)
+    }
+
+  }, [])
+
+  useEffect(() => {
+
+    localStorage.setItem(
+      'voiceflowtasks',
+      JSON.stringify(tasks)
+    )
+
+  }, [tasks])
+
+  const addTask = () => {
+
+    if(
+      task.trim() === '' ||
+      assignedTo.trim() === ''
+    ){
+      setError('Please fill all fields')
+      return
+    }
+
+    const newTask = {
+
+      id: Date.now(),
+      task,
+      assignedTo,
+      priority
+    }
+
+    setTasks([...tasks, newTask])
+
+    setTask('')
+    setAssignedTo('')
+    setPriority('High')
+    setError('')
+  }
+
+  const deleteTask = (id) => {
+
+    const updatedTasks =
+      tasks.filter((item) => item.id !== id)
+
+    setTasks(updatedTasks)
+  }
+
   return (
-    <div>
+
+    <div className="container">
 
       {/* Navbar */}
 
@@ -19,11 +82,11 @@ function App() {
           </li>
 
           <li>
-            <a href="#features">Features</a>
+            <a href="#dashboard">Dashboard</a>
           </li>
 
           <li>
-            <a href="#workflow">Workflow</a>
+            <a href="#tasks">Tasks</a>
           </li>
 
           <li>
@@ -34,226 +97,198 @@ function App() {
 
       </nav>
 
-
-      {/* Hero Section */}
+      {/* Hero */}
 
       <section id="home" className="hero">
 
         <div className="hero-content">
 
           <h1>
-            AI-Powered Meeting Minutes &
-            Jira Ticket Automation
+            AI Meeting Minutes &
+            Smart Jira Automation
           </h1>
 
           <p>
-            VoiceFlow AI automatically converts meeting recordings into
-            smart summaries, action items, and Jira tickets using
-            advanced artificial intelligence technology.
+            VoiceFlow AI transforms meetings into
+            actionable insights, summaries, and
+            automated Jira tasks using Artificial Intelligence.
           </p>
 
-          <div className="hero-buttons">
-
-            <button className="primary-btn">
-              Get Started
-            </button>
-
-            <button className="secondary-btn">
-              Learn More
-            </button>
-
-          </div>
-
-        </div>
-
-        <div className="hero-image">
-
-          <img
-            src="https://img.freepik.com/free-vector/artificial-intelligence-concept-illustration_114360-7000.jpg"
-            alt="AI Assistant"
-          />
+          <button>
+            Explore Dashboard
+          </button>
 
         </div>
 
       </section>
 
+      {/* Dashboard */}
 
-      {/* Features */}
+      <section id="dashboard" className="dashboard">
 
-      <section id="features" className="features">
+        <h2>AI Productivity Dashboard</h2>
 
-        <h2>Core Features</h2>
+        <div className="stats-container">
+
+          <div className="stat-card">
+
+            <h1>{tasks.length}</h1>
+
+            <p>Total Tasks</p>
+
+          </div>
+
+          <div className="stat-card">
+
+            <h1>95%</h1>
+
+            <p>Automation Accuracy</p>
+
+          </div>
+
+          <div className="stat-card">
+
+            <h1>80%</h1>
+
+            <p>Time Saved</p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* Tasks */}
+
+      <section id="tasks" className="tasks-section">
+
+        <h2>Meeting Action Items</h2>
 
         <p className="subtitle">
-          Smart AI automation features designed for modern teams.
+          Manage AI-generated meeting tasks dynamically
         </p>
 
-        <div className="feature-container">
+        {/* Form */}
 
-          <div className="feature-card">
-
-            <h3>Speech Recognition</h3>
-
-            <p>
-              Convert meeting audio recordings into accurate transcripts
-              using AI-powered speech processing.
-            </p>
-
-          </div>
-
-          <div className="feature-card">
-
-            <h3>AI Summarization</h3>
-
-            <p>
-              Generate concise summaries and important discussion points
-              automatically.
-            </p>
-
-          </div>
-
-          <div className="feature-card">
-
-            <h3>Jira Automation</h3>
-
-            <p>
-              Automatically generate Jira and Trello tickets from
-              meeting conversations.
-            </p>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      {/* Workflow */}
-
-      <section id="workflow" className="workflow">
-
-        <h2>How VoiceFlow Works</h2>
-
-        <p className="subtitle">
-          Intelligent workflow automation in three simple steps.
-        </p>
-
-        <div className="steps">
-
-          <div className="step-box">
-
-            <span>1</span>
-
-            <h3>Upload Meeting</h3>
-
-            <p>
-              Upload recorded meeting audio files securely.
-            </p>
-
-          </div>
-
-          <div className="step-box">
-
-            <span>2</span>
-
-            <h3>AI Processing</h3>
-
-            <p>
-              AI analyzes conversations and extracts important details.
-            </p>
-
-          </div>
-
-          <div className="step-box">
-
-            <span>3</span>
-
-            <h3>Create Tickets</h3>
-
-            <p>
-              Action items and Jira tickets are generated automatically.
-            </p>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      {/* Statistics */}
-
-      <section className="statistics">
-
-        <div className="stat-card">
-
-          <h2>95%</h2>
-
-          <p>Productivity Increase</p>
-
-        </div>
-
-        <div className="stat-card">
-
-          <h2>80%</h2>
-
-          <p>Time Saved</p>
-
-        </div>
-
-        <div className="stat-card">
-
-          <h2>100+</h2>
-
-          <p>Meetings Automated</p>
-
-        </div>
-
-      </section>
-
-
-      {/* Contact */}
-
-      <section id="contact" className="contact">
-
-        <h2>Contact Us</h2>
-
-        <p className="subtitle">
-          Reach out to learn more about VoiceFlow AI.
-        </p>
-
-        <form>
+        <div className="task-form">
 
           <input
             type="text"
-            placeholder="Enter Your Name"
+            placeholder="Enter Task"
+            value={task}
+            onChange={(e) =>
+              setTask(e.target.value)
+            }
           />
 
           <input
-            type="email"
-            placeholder="Enter Your Email"
+            type="text"
+            placeholder="Assigned To"
+            value={assignedTo}
+            onChange={(e) =>
+              setAssignedTo(e.target.value)
+            }
           />
 
-          <textarea
-            rows="5"
-            placeholder="Enter Your Message">
-          </textarea>
+          <select
+            value={priority}
+            onChange={(e) =>
+              setPriority(e.target.value)
+            }
+          >
 
-          <button type="submit">
-            Submit
+            <option>High</option>
+            <option>Medium</option>
+            <option>Low</option>
+
+          </select>
+
+          <button onClick={addTask}>
+            Add Task
           </button>
 
-        </form>
+        </div>
+
+        {/* Validation */}
+
+        {
+          error &&
+          <p className="error">{error}</p>
+        }
+
+        {/* Dynamic Rendering */}
+
+        <div className="tasks-container">
+
+          {
+            tasks.map((item) => (
+
+              <div
+                className="task-card"
+                key={item.id}
+              >
+
+                <h3>{item.task}</h3>
+
+                <p>
+                  Assigned To:
+                  <span>
+                    {' '}
+                    {item.assignedTo}
+                  </span>
+                </p>
+
+                <div className="priority">
+
+                  Priority:
+                  <span>
+                    {' '}
+                    {item.priority}
+                  </span>
+
+                </div>
+
+                <button
+                  className="delete-btn"
+                  onClick={() =>
+                    deleteTask(item.id)
+                  }
+                >
+                  Delete
+                </button>
+
+              </div>
+
+            ))
+          }
+
+        </div>
 
       </section>
 
+      {/* Contact */}
+
+      <section
+        id="contact"
+        className="contact"
+      >
+
+        <h2>Contact VoiceFlow AI</h2>
+
+        <p>
+          AI-powered workflow automation for
+          smarter engineering teams.
+        </p>
+
+      </section>
 
       {/* Footer */}
 
       <footer>
 
         <p>
-          © 2026 VoiceFlow AI | MERN Stack Internship Project
+          © 2026 VoiceFlow AI |
+          MERN Stack Internship Project
         </p>
 
       </footer>
