@@ -1,4 +1,5 @@
 import './App.css'
+import axios from 'axios'
 import { useState, useEffect } from 'react'
 
 function App() {
@@ -9,59 +10,107 @@ function App() {
   const [tasks, setTasks] = useState([])
   const [error, setError] = useState('')
 
+
+
+  // FETCH TASKS FROM MONGODB
+
   useEffect(() => {
 
-    const savedTasks =
-      JSON.parse(localStorage.getItem('voiceflowtasks'))
-
-    if(savedTasks){
-      setTasks(savedTasks)
-    }
+    fetchTasks()
 
   }, [])
 
-  useEffect(() => {
 
-    localStorage.setItem(
-      'voiceflowtasks',
-      JSON.stringify(tasks)
-    )
 
-  }, [tasks])
+  const fetchTasks = async () => {
 
-  const addTask = () => {
+    try {
 
-    if(
+      const res = await axios.get(
+        'http://localhost:5000/api/tasks'
+      )
+
+      setTasks(res.data)
+
+    } catch (error) {
+
+      console.log(error)
+
+    }
+
+  }
+
+
+
+  // ADD TASK
+
+  const addTask = async () => {
+
+    if (
       task.trim() === '' ||
       assignedTo.trim() === ''
-    ){
+    ) {
+
       setError('Please fill all fields')
+
       return
+
     }
 
-    const newTask = {
+    try {
 
-      id: Date.now(),
-      task,
-      assignedTo,
-      priority
+      const newTask = {
+        task,
+        assignedTo,
+        priority
+      }
+
+      const res = await axios.post(
+        'http://localhost:5000/api/tasks',
+        newTask
+      )
+
+      setTasks([...tasks, res.data])
+
+      setTask('')
+      setAssignedTo('')
+      setPriority('High')
+      setError('')
+
+    } catch (error) {
+
+      console.log(error)
+
     }
 
-    setTasks([...tasks, newTask])
-
-    setTask('')
-    setAssignedTo('')
-    setPriority('High')
-    setError('')
   }
 
-  const deleteTask = (id) => {
 
-    const updatedTasks =
-      tasks.filter((item) => item.id !== id)
 
-    setTasks(updatedTasks)
+  // DELETE TASK
+
+  const deleteTask = async (id) => {
+
+    try {
+
+      await axios.delete(
+        `http://localhost:5000/api/tasks/${id}`
+      )
+
+      const updatedTasks =
+        tasks.filter((item) => item._id !== id)
+
+      setTasks(updatedTasks)
+
+    } catch (error) {
+
+      console.log(error)
+
+    }
+
   }
+
+
 
   return (
 
@@ -86,6 +135,14 @@ function App() {
           </li>
 
           <li>
+            <a href="#features">Features</a>
+          </li>
+
+          <li>
+            <a href="#workflow">Workflow</a>
+          </li>
+
+          <li>
             <a href="#tasks">Tasks</a>
           </li>
 
@@ -96,6 +153,8 @@ function App() {
         </ul>
 
       </nav>
+
+
 
       {/* Hero */}
 
@@ -121,6 +180,8 @@ function App() {
         </div>
 
       </section>
+
+
 
       {/* Dashboard */}
 
@@ -158,6 +219,111 @@ function App() {
 
       </section>
 
+
+
+      {/* Core Features */}
+
+      <section
+        id="features"
+        className="features"
+      >
+
+        <h2>Core Features</h2>
+
+        <div className="feature-container">
+
+          <div className="feature-card">
+
+            <h3>Speech Recognition</h3>
+
+            <p>
+              Convert meeting audio recordings
+              into accurate text using advanced AI.
+            </p>
+
+          </div>
+
+          <div className="feature-card">
+
+            <h3>AI Summarization</h3>
+
+            <p>
+              Generate concise summaries and
+              important meeting decisions instantly.
+            </p>
+
+          </div>
+
+          <div className="feature-card">
+
+            <h3>Jira Automation</h3>
+
+            <p>
+              Automatically create Jira tickets
+              and assign tasks from discussions.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      {/* Workflow */}
+
+      <section
+        id="workflow"
+        className="workflow"
+      >
+
+        <h2>How VoiceFlow Works</h2>
+
+        <div className="steps">
+
+          <div className="step">
+
+            <span>1</span>
+
+            <h3>Upload Meeting</h3>
+
+            <p>
+              Upload recorded meeting audio files securely.
+            </p>
+
+          </div>
+
+          <div className="step">
+
+            <span>2</span>
+
+            <h3>AI Processing</h3>
+
+            <p>
+              AI analyzes conversations and extracts tasks.
+            </p>
+
+          </div>
+
+          <div className="step">
+
+            <span>3</span>
+
+            <h3>Create Tickets</h3>
+
+            <p>
+              Action items and Jira tickets are generated automatically.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
       {/* Tasks */}
 
       <section id="tasks" className="tasks-section">
@@ -167,6 +333,8 @@ function App() {
         <p className="subtitle">
           Manage AI-generated meeting tasks dynamically
         </p>
+
+
 
         {/* Form */}
 
@@ -209,12 +377,16 @@ function App() {
 
         </div>
 
+
+
         {/* Validation */}
 
         {
           error &&
           <p className="error">{error}</p>
         }
+
+
 
         {/* Dynamic Rendering */}
 
@@ -225,7 +397,7 @@ function App() {
 
               <div
                 className="task-card"
-                key={item.id}
+                key={item._id}
               >
 
                 <h3>{item.task}</h3>
@@ -251,7 +423,7 @@ function App() {
                 <button
                   className="delete-btn"
                   onClick={() =>
-                    deleteTask(item.id)
+                    deleteTask(item._id)
                   }
                 >
                   Delete
@@ -266,6 +438,8 @@ function App() {
 
       </section>
 
+
+
       {/* Contact */}
 
       <section
@@ -273,14 +447,39 @@ function App() {
         className="contact"
       >
 
-        <h2>Contact VoiceFlow AI</h2>
+        <h2>Contact Us</h2>
 
         <p>
-          AI-powered workflow automation for
-          smarter engineering teams.
+          Reach out to learn more about VoiceFlow AI.
         </p>
 
+        <form className="contact-form">
+
+          <input
+            type="text"
+            placeholder="Enter Your Name"
+          />
+
+          <input
+            type="email"
+            placeholder="Enter Your Email"
+          />
+
+          <textarea
+            rows="5"
+            placeholder="Enter Your Message"
+          >
+          </textarea>
+
+          <button type="submit">
+            Submit
+          </button>
+
+        </form>
+
       </section>
+
+
 
       {/* Footer */}
 
