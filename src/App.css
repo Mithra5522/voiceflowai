@@ -11,7 +11,9 @@ body{
   color:white;
 }
 
-/* Navbar */
+
+
+/* NAVBAR */
 
 .navbar{
   width:100%;
@@ -66,7 +68,9 @@ body{
   color:#38bdf8;
 }
 
-/* Hero */
+
+
+/* HERO */
 
 .hero{
   min-height:100vh;
@@ -118,9 +122,12 @@ body{
   transform:translateY(-6px);
 }
 
-/* Dashboard */
+
+
+/* DASHBOARD */
 
 .dashboard{
+  min-height:100vh;
   padding:100px 8%;
   text-align:center;
   background:#111827;
@@ -157,9 +164,12 @@ body{
   margin-bottom:15px;
 }
 
-/* Features */
+
+
+/* FEATURES */
 
 .features{
+  min-height:100vh;
   padding:100px 8%;
   text-align:center;
   background:white;
@@ -202,9 +212,12 @@ body{
   line-height:1.7;
 }
 
-/* Workflow */
+
+
+/* WORKFLOW */
 
 .workflow{
+  min-height:100vh;
   padding:100px 8%;
   background:#111827;
   text-align:center;
@@ -228,6 +241,7 @@ body{
   padding:35px;
   border-radius:24px;
   transition:0.3s;
+  box-shadow:0 8px 25px rgba(0,0,0,0.3);
 }
 
 .step:hover{
@@ -257,9 +271,12 @@ body{
   line-height:1.7;
 }
 
-/* Tasks */
+
+
+/* TASKS */
 
 .tasks-section{
+  min-height:100vh;
   padding:100px 8%;
   text-align:center;
   background:
@@ -269,8 +286,6 @@ body{
     #1e293b,
     #2563eb
   );
-  position:relative;
-  z-index:1;
 }
 
 .tasks-section h2{
@@ -284,135 +299,118 @@ body{
   font-size:18px;
 }
 
-/* Form */
-
-/* Tasks Section (Simplified) */
-
-.tasks-section{
-  padding:100px 8%;
-  text-align:center;
-  background: linear-gradient(135deg, #0f172a, #1e293b, #2563eb);
-}
-
-/* title */
-.tasks-section h2{
-  font-size:48px;
-  margin-bottom:10px;
-}
-
-.subtitle{
-  color:#cbd5e1;
-  margin-bottom:35px;
-  font-size:16px;
-}
-
-/* form stays same */
 .task-form{
   display:flex;
   justify-content:center;
-  gap:15px;
+  gap:20px;
   flex-wrap:wrap;
   margin-bottom:25px;
 }
 
-/* input box (keep simple) */
 .task-form input,
 .task-form select{
-  width:240px;
-  padding:14px;
+  width:260px;
+  padding:16px;
   border:none;
-  border-radius:12px;
-  outline:none;
+  border-radius:14px;
+  background:white;
+  font-size:16px;
 }
 
-/* button */
 .task-form button{
-  padding:14px 24px;
+  padding:16px 28px;
   border:none;
-  border-radius:12px;
-  background:#2563eb;
+  border-radius:14px;
+  background:
+  linear-gradient(
+    to right,
+    #38bdf8,
+    #2563eb
+  );
   color:white;
+  font-size:16px;
   cursor:pointer;
+  transition:0.3s;
 }
 
-/* error */
+.task-form button:hover{
+  transform:translateY(-5px);
+}
+
 .error{
   color:#f87171;
-  margin-bottom:15px;
+  margin-bottom:20px;
 }
 
-/* TASK LIST (cards unchanged look, just cleaner spacing) */
 .tasks-container{
   display:flex;
   justify-content:center;
+  gap:30px;
   flex-wrap:wrap;
-  gap:25px;
-  margin-top:30px;
+  margin-top:45px;
 }
 
-/* CARD (same box style, simplified) */
 .task-card{
-  width:300px;
-  padding:25px;
-  border-radius:20px;
-  background:#1e293b;
-  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+  width:320px;
+  padding:35px;
+  border-radius:24px;
+  background:
+  rgba(255,255,255,0.08);
+  backdrop-filter:blur(12px);
+  box-shadow:
+  0 8px 25px rgba(0,0,0,0.3);
   transition:0.3s;
 }
 
 .task-card:hover{
-  transform:translateY(-6px);
+  transform:translateY(-10px);
 }
 
-/* text */
 .task-card h3{
   color:#38bdf8;
-  margin-bottom:12px;
-  font-size:20px;
+  margin-bottom:18px;
 }
 
 .task-card p{
-  margin-bottom:10px;
+  margin-bottom:18px;
   color:#e2e8f0;
-  font-size:14px;
 }
 
-/* priority */
 .priority{
-  margin-bottom:15px;
+  margin-bottom:22px;
   color:#facc15;
-  font-size:14px;
 }
 
-/* buttons */
 .task-buttons{
   display:flex;
   justify-content:center;
-  gap:10px;
-}
-
-.edit-btn,
-.delete-btn{
-  padding:10px 16px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:13px;
+  gap:12px;
 }
 
 .edit-btn{
+  padding:12px 22px;
+  border:none;
+  border-radius:10px;
   background:#2563eb;
   color:white;
+  cursor:pointer;
 }
 
 .delete-btn{
+  padding:12px 22px;
+  border:none;
+  border-radius:10px;
   background:#ef4444;
   color:white;
+  cursor:pointer;
 }
 
-/* Contact */
+
+
+/* CONTACT */
 
 .contact{
+  min-height:100vh;
   padding:100px 8%;
   text-align:center;
   background:
@@ -461,9 +459,16 @@ body{
   color:white;
   font-size:16px;
   cursor:pointer;
+  transition:0.3s;
 }
 
-/* Footer */
+.contact-form button:hover{
+  transform:translateY(-5px);
+}
+
+
+
+/* FOOTER */
 
 footer{
   background:black;
@@ -473,7 +478,20 @@ footer{
   letter-spacing:1px;
 }
 
-/* Animations */
+
+
+/* USER EMAIL */
+
+.user-email{
+  margin-bottom:30px;
+  color:#38bdf8;
+  font-size:20px;
+  font-weight:bold;
+}
+
+
+
+/* ANIMATION */
 
 @keyframes fadeUp{
 
@@ -489,7 +507,9 @@ footer{
 
 }
 
-/* Responsive */
+
+
+/* RESPONSIVE */
 
 @media(max-width:900px){
 

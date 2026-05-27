@@ -12,7 +12,9 @@ router.get("/", async (req, res) => {
 
   try {
 
-    const tasks = await Task.find();
+    const tasks = await Task.find({
+  userEmail: req.query.email
+});
 
     res.json(tasks);
 
@@ -42,13 +44,15 @@ router.post("/", async (req, res) => {
 
     const newTask = new Task({
 
-      task: req.body.task,
+  task: req.body.task,
 
-      assignedTo: req.body.assignedTo,
+  assignedTo: req.body.assignedTo,
 
-      priority: req.body.priority,
+  priority: req.body.priority,
 
-    });
+  userEmail: req.body.userEmail,
+
+});
 
     const savedTask = await newTask.save();
 
